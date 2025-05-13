@@ -1,20 +1,18 @@
 from django import forms
-from .models import CustomUser
+from .models import User
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
-    password_confirm = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = CustomUser
-        fields = ['email', 'username', 'password', 'password_confirm']
+        model = User
+        fields = ['name', 'email', 'password']
 
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
-        password_confirm = cleaned_data.get("password_confirm")
-
-        if password and password_confirm and password != password_confirm:
-            raise forms.ValidationError("Пароли не совпадают")
-
+        confirm = cleaned_data.get("confirm_password")
+        if password and confirm and password != confirm:
+            raise forms.ValidationError("Passwords do not match")
         return cleaned_data
