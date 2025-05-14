@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'django.contrib.sites',  # нужно для восстановления пароля
+    'events',
     
 
 ]
