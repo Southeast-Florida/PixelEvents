@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #c850c0, #4158d0);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .card h1 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            background: linear-gradient(to right, #c850c0, #4158d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card p {
+            margin: 10px 0 20px;
+            color: #333;
+        }
+
+        .profile-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .option {
+            flex: 1;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .option:hover {
+            border-color: #a145c2;
+            transform: scale(1.05);
+        }
+
+        .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .login-text {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #4158d0;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .profile-options {
+                flex-direction: column;
+            }
+
+            .option {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Register</h1>
+            <p>Select profile type</p>
+            <div class="profile-options">
+                <a href="{% url 'organizer_register' %}" class="option">
+                    <div class="icon">📅</div>
+                    <span>Event Organizer</span>
+                </a>
+                <a href="{% url 'user_register' %}" class="option">
+                    <div class="icon">👤</div>
+                    <span>Regular User</span>
+                </a>
+            </div>
+            <p class="login-text">
+                Already have an account?
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
