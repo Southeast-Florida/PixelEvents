@@ -1,23 +1,35 @@
-
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
-from .forms import RegisterForm
 from django.contrib.auth.views import LoginView
 from django.utils.timezone import now
 
-def register_view(request):
+from .forms import UserRegisterForm, OrganizerRegisterForm
+
+def choose_register_view(request):
+    return render(request, 'accounts/choose_register.html')  # 👈 добавлено
+
+def user_register_view(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
+            user = form.save()
+            login(request, user)
             return redirect('login')
     else:
-        form = RegisterForm()
-    return render(request, 'accounts/register.html', {'form': form})  # ✅ фикс
+        form = UserRegisterForm()
+    return render(request, 'accounts/user_register.html', {'form': form})
+
+def organizer_register_view(request):
+    if request.method == 'POST':
+        form = OrganizerRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('login')
+    else:
+        form = OrganizerRegisterForm()
+    return render(request, 'accounts/organizer_register.html', {'form': form})
 
 class CustomLoginView(LoginView):
     def form_valid(self, form):

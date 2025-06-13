@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мероприятие создано</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .confirmation-wrapper {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .confirmation-header {
+            background: linear-gradient(to right, #7f00ff, #e100ff);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 1.25rem;
+        }
+
+        .confirmation-body {
+            padding: 2rem;
+        }
+
+        .confirmation-body h1 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkmark {
+            font-size: 3rem;
+            color: #3ac166;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        table th, table td {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        table th {
+            background-color: #f0f0f0;
+            width: 40%;
+        }
+
+        .confirmation-footer a {
+            display: inline-block;
+            background: linear-gradient(to right, #7f00ff, #e100ff);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+
+        .confirmation-footer a:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-wrapper">
+        <div class="confirmation-header">
+            pixel events — МЕРОПРИЯТИЕ СОЗДАНО
+        </div>
+        <div class="confirmation-body">
+            <div class="checkmark">✔</div>
+            <h1>Мероприятие успешно создано</h1>
+            <table>
+                <tr>
+                    <th>Название</th>
+                    <td>{{ event.title }}</td>
+                </tr>
+                <tr>
+                    <th>Тип</th>
+                    <td>{{ event.event_type }}</td>
+                </tr>
+                <tr>
+                    <th>Дата и время</th>
+                    <td>{{ event.datetime|date:"d.m.Y H:i" }}</td>
+                </tr>
+                <tr>
+                    <th>Место проведения</th>
+                    <td>{{ event.location }}</td>
+                </tr>
+                <tr>
+                    <th>Макс. участников</th>
+                    <td>{{ event.max_participants }}</td>
+                </tr>
+            </table>
+            <div class="confirmation-footer">
+                <a href="{% url 'create_event' %}">Создать ещё одно мероприятие</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
