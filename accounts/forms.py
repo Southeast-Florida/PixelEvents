@@ -2,8 +2,14 @@ from django import forms
 from .models import User
 
 class BaseRegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(
+        widget=forms.PasswordInput,
+        label="Password"
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput,
+        label="Confirm Password"
+    )
 
     class Meta:
         model = User
@@ -13,8 +19,10 @@ class BaseRegisterForm(forms.ModelForm):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         confirm = cleaned_data.get("confirm_password")
+
         if password and confirm and password != confirm:
             raise forms.ValidationError("Passwords do not match")
+
         return cleaned_data
 
 class UserRegisterForm(BaseRegisterForm):
@@ -34,4 +42,3 @@ class OrganizerRegisterForm(BaseRegisterForm):
         if commit:
             user.save()
         return user
-
