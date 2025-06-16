@@ -1,173 +1,204 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Создание мероприятия</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: #f5f5f5;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Создание мероприятия</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #c850c0, #4158d0);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .topbar {
-            background-color: #5a2068;
-            padding: 0.75rem 2rem;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+    header {
+      background-color: #4b006e;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-        .topbar-inner {
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .logo {
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    nav {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
-        .logo img {
-            width: 32px;
-            height: 32px;
-        }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-        }
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-            white-space: nowrap;
-        }
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      flex: 1;
+    }
 
-        .nav-links img {
-            width: 18px;
-            height: 18px;
-        }
+    .form-card {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
 
-        main {
-            display: flex;
-            justify-content: center;
-            padding: 2rem 1rem;
-        }
+    .form-card h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(to right, #ff00cc, #3333ff);
+      padding: 15px;
+      border-radius: 15px;
+    }
 
-        .form-wrapper {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            overflow: hidden;
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-        .form-header {
-            background: linear-gradient(to right, #7f00ff, #e100ff);
-            color: white;
-            text-align: center;
-            font-size: 1.5rem;
-            padding: 1.25rem;
-            font-weight: bold;
-        }
+    input,
+    textarea,
+    select {
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
 
-        .event-form {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+    input[type="file"] {
+      padding: 10px;
+      border: none;
+    }
 
-        .event-form input[type="text"],
-        .event-form input[type="datetime-local"],
-        .event-form input[type="file"],
-        .event-form input[type="number"] {
-            padding: 0.75rem 1rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1rem;
-            width: 100%;
-        }
+    .error-msg {
+      color: red;
+      font-size: 13px;
+      margin: -10px 0 5px;
+    }
 
-        .event-form button {
-            background: linear-gradient(to right, #7f00ff, #e100ff);
-            border: none;
-            color: white;
-            padding: 1rem;
-            font-size: 1rem;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
+    button {
+      margin-top: 10px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #c850c0, #4158d0);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-        .event-form button:hover {
-            opacity: 0.9;
-        }
+    button:hover {
+      background: linear-gradient(to right, #a03aa0, #3048c0);
+    }
 
-        .error-msg {
-            color: red;
-            font-size: 0.9rem;
-        }
-    </style>
+    @media (max-width: 480px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .form-card {
+        padding: 30px 20px;
+      }
+
+      input, textarea, button {
+        font-size: 15px;
+      }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a2d9d6f409.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="topbar">
-        <div class="topbar-inner">
-            <div class="logo">
-                <img src="logo.png" alt="logo">
-                <span>pixel events</span>
-            </div>
-            <nav class="nav-links">
-                <a href="#"><img src="search-icon.png" alt=""> Найти мероприятие</a>
-                <a href="#"><img src="calendar-icon.png" alt=""> Календарь</a>
-                <a href="#"><img src="upcoming-icon.png" alt=""> Предстоящие мероприятия</a>
-                <a href="#"><img src="user-icon.png" alt=""> Личный кабинет</a>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <section class="form-wrapper">
-            <div class="form-header">СОЗДАНИЕ НОВОГО МЕРОПРИЯТИЯ</div>
-            <form method="post" enctype="multipart/form-data" class="event-form">
-                {% csrf_token %}
+<header>
+  <div class="logo">🎟️ pixel events</div>
+  <nav>
+    <a href="#"><i class="fas fa-search"></i> Найти мероприятие</a>
+    <a href="#"><i class="fas fa-calendar-alt"></i> Календарь</a>
+    <a href="#"><i class="fas fa-bolt"></i> Предстоящие</a>
+    <a href="#"><i class="fas fa-user-circle"></i> Личный кабинет</a>
+  </nav>
+</header>
 
-                {% if form.non_field_errors %}
-                    <div class="error-msg">{{ form.non_field_errors }}</div>
-                {% endif %}
+<main>
+  <div class="form-card">
+    <h1>СОЗДАНИЕ НОВОГО МЕРОПРИЯТИЯ</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
 
-                <input type="text" name="title" placeholder="1. Укажите название мероприятия" required>
-                <input type="text" name="event_type" placeholder="2. Тип события" required>
-                <input type="datetime-local" name="datetime" placeholder="3. Дата и время" required>
-                <input type="text" name="location" placeholder="4. Место проведения" required>
-                <input type="text" name="description" placeholder="5. Описание мероприятия">
-                <input type="file" name="cover" required>
-                <input type="number" name="max_participants" placeholder="6. Максимум участников" min="1" required>
+      {% if form.non_field_errors %}
+        <div class="error-msg">{{ form.non_field_errors }}</div>
+      {% endif %}
 
-                <button type="submit">СОЗДАТЬ МЕРОПРИЯТИЕ</button>
+      <input type="text" name="title" placeholder="1. Укажите название мероприятия" value="{{ form.title.value|default_if_none:'' }}" required>
+      {% for error in form.title.errors %}
+        <div class="error-msg">{{ error }}</div>
+      {% endfor %}
 
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <div class="error-msg">{{ error }}</div>
-                    {% endfor %}
-                {% endfor %}
-            </form>
-        </section>
-    </main>
+      <input type="text" name="event_type" placeholder="2. Тип события" value="{{ form.event_type.value|default_if_none:'' }}" required>
+      {% for error in form.event_type.errors %}
+        <div class="error-msg">{{ error }}</div>
+      {% endfor %}
+
+      <input type="datetime-local" name="datetime" value="{{ form.datetime.value|default_if_none:'' }}" required>
+      {% for error in form.datetime.errors %}
+        <div class="error-msg">{{ error }}</div>
+      {% endfor %}
+
+      <input type="text" name="location" placeholder="4. Место проведения" value="{{ form.location.value|default_if_none:'' }}" required>
+      {% for error in form.location.errors %}
+        <div class="error-msg">{{ error }}</div>
+      {% endfor %}
+
+      <textarea name="description" rows="4" placeholder="5. Описание мероприятия">{{ form.description.value|default_if_none:'' }}</textarea>
+      {% for error in form.description.errors %}
+        <div class="error-msg">{{ error }}</div>
+      {% endfor %}
+
+      <input type="file" name="cover">
+      {% for error in form.cover.errors %}
+        <div class="error-msg">{{ error }}</div>
+      {% endfor %}
+
+      <input type="number" name="max_participants" placeholder="6. Максимум участников" value="{{ form.max_participants.value|default_if_none:'' }}" required>
+      {% for error in form.max_participants.errors %}
+        <div class="error-msg">{{ error }}</div>
+      {% endfor %}
+
+      <button type="submit">СОЗДАТЬ МЕРОПРИЯТИЕ</button>
+    </form>
+  </div>
+</main>
+
 </body>
 </html>
